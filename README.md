@@ -1,7 +1,7 @@
 <!-- README.md -->
 # Realtime SPH
 
-GPU-side realtime SPH/PBF fluid demo using `ds-vk` as a git submodule in `external/ds-vk`.
+GPU-side realtime SPH/PBF fluid demo using `ds-vk`, fetched by CMake at a pinned commit.
 
 ## Run
 
@@ -44,4 +44,4 @@ The local validation script currently covers:
 
 ## Dependency
 
-`ds-vk` is pulled in as `external/ds-vk`. Run `git submodule update --init --recursive` after cloning. Local scratch/assets belong under ignored `local/`.
+`ds-vk` is fetched by CMake from `git@github.com:Daniel-Sinkin/ds-vk.git` and pinned to commit `62a43e99905177aef79099308976f70a2bd76a54`. Local scratch/assets belong under ignored `local/`.

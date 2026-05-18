@@ -1,4 +1,0 @@
-# .gitmodules
-[submodule "external/ds-vk"]
-	path = external/ds-vk
-	url = git@github.com:Daniel-Sinkin/ds-vk.git
