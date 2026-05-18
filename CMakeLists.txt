@@ -28,7 +28,7 @@ find_program(GLSLC_EXECUTABLE NAMES glslc REQUIRED)
 include(FetchContent)
 
 set(DS_VK_GIT_REPOSITORY "git@github.com:Daniel-Sinkin/ds-vk.git" CACHE STRING "ds-vk Git repository")
-set(DS_VK_GIT_TAG "62a43e99905177aef79099308976f70a2bd76a54" CACHE STRING "Frozen ds-vk commit")
+set(DS_VK_GIT_TAG "c8fd46f192aefbdd06572e93f9228e9b5f40c374" CACHE STRING "Frozen ds-vk v0.1.0 commit")
 FetchContent_Declare(ds_vk
   GIT_REPOSITORY "${DS_VK_GIT_REPOSITORY}"
   GIT_TAG "${DS_VK_GIT_TAG}"
