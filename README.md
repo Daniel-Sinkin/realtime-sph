@@ -1,3 +1,4 @@
+<!-- README.md -->
 # Realtime SPH
 
 GPU-side realtime SPH/PBF fluid demo using `ds-vk` as a git submodule in `external/ds-vk`.

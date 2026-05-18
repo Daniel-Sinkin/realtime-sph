@@ -1,3 +1,4 @@
+// shaders/realtime_sph_particles.frag
 #version 450
 
 struct RenderParams

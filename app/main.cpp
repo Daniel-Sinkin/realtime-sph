@@ -1,3 +1,4 @@
+// app/main.cpp
 #include "realtime_sph/realtime_sph_app.hpp"
 
 auto main(int argc, char** argv) -> int

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# run_validation.sh
 set -euo pipefail
 
 app="${1:-./build/realtime_sph}"

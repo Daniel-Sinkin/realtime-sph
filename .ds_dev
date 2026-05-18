@@ -1,3 +1,4 @@
+# .ds_dev
 # ds-template project-local development config
 marker_tidy = true
 build_dir = build
