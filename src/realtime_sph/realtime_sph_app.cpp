@@ -29,7 +29,7 @@
 #include <vector>
 //
 
-namespace ds_vk_app::realtime_sph
+namespace dans::app::realtime_sph
 {
 namespace
 {
@@ -3193,4 +3193,4 @@ auto run_realtime_sph_app(int argc, char** argv) -> int
     app.shutdown(runtime);
     return exit_code;
 }
-}  // namespace ds_vk_app::realtime_sph
+}  // namespace dans::app::realtime_sph

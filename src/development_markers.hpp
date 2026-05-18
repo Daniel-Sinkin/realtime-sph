@@ -40,13 +40,13 @@
 // Only use this on the auto for functions when using trailing return
 #define def auto
 
-namespace realtime_sph
+namespace dans::app::realtime_sph
 {
 template <typename T>
 [[nodiscard]] constexpr def copy(const T& value) -> std::remove_cvref_t<T>
 {
     return value;
 }
-}  // namespace realtime_sph
+}  // namespace dans::app::realtime_sph
 
 #endif  // REALTIME_SPH_SRC_DEVELOPMENT_MARKERS_HPP

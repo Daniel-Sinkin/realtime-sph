@@ -7,6 +7,6 @@
 
 auto main(int argc, char** argv) -> int
 {
-    return ds_vk_app::realtime_sph::run_realtime_sph_app(argc, argv);
+    return dans::app::realtime_sph::run_realtime_sph_app(argc, argv);
 }
 
