@@ -67,6 +67,10 @@ target_include_directories(realtime_sph PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
+target_precompile_headers(realtime_sph PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/pch.hpp
+)
+
 target_compile_definitions(realtime_sph PRIVATE
   DS_VK_SHADER_DIR="${REALTIME_SPH_SHADER_OUTPUT_DIR}"
 )
