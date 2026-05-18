@@ -44,4 +44,4 @@ The local validation script currently covers:
 
 ## Dependency
 
-`ds-vk` is fetched by CMake from `git@github.com:Daniel-Sinkin/ds-vk.git` and pinned to commit `62a43e99905177aef79099308976f70a2bd76a54`. Local scratch/assets belong under ignored `local/`.
+`ds-vk` is fetched by CMake from `git@github.com:Daniel-Sinkin/ds-vk.git` and pinned to commit `c8fd46f192aefbdd06572e93f9228e9b5f40c374`. Local scratch/assets belong under ignored `local/`.
