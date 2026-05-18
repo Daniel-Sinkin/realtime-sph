@@ -11,7 +11,7 @@ if(APPLE AND NOT DEFINED CMAKE_C_COMPILER AND NOT DEFINED CMAKE_CXX_COMPILER)
   endforeach()
 endif()
 
-project(ds_template LANGUAGES C CXX)
+project(realtime_sph LANGUAGES C CXX)
 
 if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Build type" FORCE)
@@ -22,50 +22,59 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_library(ds_template_warnings INTERFACE)
-target_compile_options(ds_template_warnings INTERFACE
-  $<$<CXX_COMPILER_ID:Clang,AppleClang,GNU>:
-    -Wall
-    -Wextra
-    -Wpedantic
-    -Werror
-    -Wshadow
-    -Wconversion
-    -Wfloat-conversion
-    -Wsign-conversion
-    -Wcast-qual
-    -Wcast-align
-    -Wformat=2
-    -Wundef
-    -Wnull-dereference
-    -Wnon-virtual-dtor
-    -Woverloaded-virtual
-    -Wold-style-cast
-    -Wzero-as-null-pointer-constant
-    -Wdouble-promotion
-    -Wimplicit-fallthrough
-    -Wreturn-type>
-  $<$<CXX_COMPILER_ID:Clang,AppleClang>:
-    -Wconditional-uninitialized
-    -Wextra-semi
-    -Wimplicit-int-conversion
-    -Wimplicit-int-float-conversion
-    -Wnewline-eof
-    -Wshorten-64-to-32
-    -Wswitch-enum
-    -Wunreachable-code>
-  $<$<CXX_COMPILER_ID:GNU>:
-    -Wduplicated-branches
-    -Wduplicated-cond
-    -Wlogical-op
-    -Wsign-compare
-    -Wuseless-cast>
+find_program(GLSLC_EXECUTABLE NAMES glslc REQUIRED)
+
+add_subdirectory(external/ds-vk)
+
+set(REALTIME_SPH_SHADER_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
+set(REALTIME_SPH_SHADER_OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/shaders)
+set(REALTIME_SPH_SHADER_SOURCES
+  shaders/realtime_sph_apply_delta.comp
+  shaders/realtime_sph_build_grid.comp
+  shaders/realtime_sph_build_neighbors.comp
+  shaders/realtime_sph_delta.comp
+  shaders/realtime_sph_lambda.comp
+  shaders/realtime_sph_particles.frag
+  shaders/realtime_sph_particles.vert
+  shaders/realtime_sph_predict.comp
+  shaders/realtime_sph_reset.comp
+  shaders/realtime_sph_velocity.comp
 )
 
-add_executable(ds_template
+set(REALTIME_SPH_SHADER_OUTPUTS)
+foreach(REALTIME_SPH_SHADER IN LISTS REALTIME_SPH_SHADER_SOURCES)
+  get_filename_component(REALTIME_SPH_SHADER_NAME "${REALTIME_SPH_SHADER}" NAME)
+  set(REALTIME_SPH_SHADER_OUTPUT "${REALTIME_SPH_SHADER_OUTPUT_DIR}/${REALTIME_SPH_SHADER_NAME}.spv")
+  add_custom_command(
+    OUTPUT "${REALTIME_SPH_SHADER_OUTPUT}"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${REALTIME_SPH_SHADER_OUTPUT_DIR}"
+    COMMAND ${GLSLC_EXECUTABLE} "${CMAKE_CURRENT_SOURCE_DIR}/${REALTIME_SPH_SHADER}" -o "${REALTIME_SPH_SHADER_OUTPUT}"
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${REALTIME_SPH_SHADER}"
+    COMMENT "Compiling ${REALTIME_SPH_SHADER_NAME}"
+    VERBATIM
+  )
+  list(APPEND REALTIME_SPH_SHADER_OUTPUTS "${REALTIME_SPH_SHADER_OUTPUT}")
+endforeach()
+add_custom_target(realtime_sph_shaders DEPENDS ${REALTIME_SPH_SHADER_OUTPUTS})
+
+add_executable(realtime_sph
   app/main.cpp
+  src/realtime_sph/realtime_sph_app.cpp
 )
-target_include_directories(ds_template PRIVATE
+add_dependencies(realtime_sph realtime_sph_shaders)
+
+target_include_directories(realtime_sph PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
-target_link_libraries(ds_template PRIVATE ds_template_warnings)
+
+target_compile_definitions(realtime_sph PRIVATE
+  DS_VK_SHADER_DIR="${REALTIME_SPH_SHADER_OUTPUT_DIR}"
+)
+
+target_link_libraries(realtime_sph PRIVATE
+  ds_vk
+  ds_vk_viz
+  ds_vk_picker
+  ds_vk_manipulator
+  ds_vk_warnings
+)

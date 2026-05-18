@@ -1,77 +1,13 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-*.so.*
-
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# Build directories
+# Local build products
 build/
-Build/
-build-*/
-
-# CMake generated files
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-Makefile
-install_manifest.txt
+cmake-build-*/
 compile_commands.json
 
-# Temporary files
+# Local-only scratch/assets. Keep available on disk, but out of git.
+local/
+
+# Runtime/editor noise
+imgui.ini
 .DS_Store
-*.tmp
-*.log
-*.bak
-*.swp
-*.swo
-*~
-
-# vcpkg
-vcpkg_installed/
-
-# debug information files
-*.dwo
-
-# test output & cache
-Testing/
 .cache/
 .venv/
-run/
-
-# Local private course material and notes.
-private/
