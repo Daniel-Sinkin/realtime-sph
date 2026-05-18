@@ -5,7 +5,11 @@
 
 #pragma once
 
+// Internals
+// Externals
+// Standard Library
 #include <type_traits>
+//
 
 #if defined(mut)
 #    error "mut marker macro is already defined"

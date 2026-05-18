@@ -1,12 +1,16 @@
 // src/realtime_sph/realtime_sph_app.cpp
+// Header
 #include "realtime_sph/realtime_sph_app.hpp"
-
+// Internals
+// Externals
 #include "ds_vk/math.hpp"
 #include "ds_vk/mesh.hpp"
 #include "ds_vk/plugins/manipulator.hpp"
 #include "ds_vk/plugins/picker.hpp"
 #include "ds_vk/plugins/viz.hpp"
-
+#include <glm/gtc/matrix_transform.hpp>
+#include <imgui.h>
+// Standard Library
 #include <algorithm>
 #include <array>
 #include <chrono>
@@ -15,8 +19,6 @@
 #include <exception>
 #include <filesystem>
 #include <fstream>
-#include <glm/gtc/matrix_transform.hpp>
-#include <imgui.h>
 #include <iostream>
 #include <numbers>
 #include <optional>
@@ -25,6 +27,7 @@
 #include <string>
 #include <string_view>
 #include <vector>
+//
 
 namespace ds_vk_app::realtime_sph
 {
